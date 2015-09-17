@@ -1,0 +1,50 @@
+<!-- OPEN THIS FILE IN A SEPARATE BROWSER TAB -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Super Friendly Happy Form</title>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+</head>
+<body>
+  <h1>Super Friendly Happy Form</h1>
+  <form action="http://localhost:3000/transfer" method="post">
+    <input type="hidden" name="payee_account_id" value="2">
+    <input type="hidden" name="credits" value="300">
+    <p>Who's your favorite Ninja Turtle?</p>
+    <input type="radio" name="turtle" value="Leonardo">Leonardo<br>
+    <input type="radio" name="turtle" value="Donatello">Donatello<br>
+    <input type="radio" name="turtle" value="Michaelangelo">Michaelangelo<br>
+    <input type="radio" name="turtle" value="Raphael">Raphael<br>
+    <input type="submit">
+  </form>
+  <div id='feedback'>
+  </div>
+</body>
+</html>
+
+<script>
+  $(function() {
+    allowFormSubmit();
+  });
+
+  var allowFormSubmit = function(){
+    $('form').on('submit', function(e){
+      e.preventDefault();
+      var data = $(this).serialize();
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/transfer",
+        data: data,
+        success: function(data){
+          console.log(data)
+          $("#feedback").text("Thanks!!!")
+        },
+        error: function(){
+          $("#feedback").text("Attack unsuccessful. :(")
+        }
+      })
+    })
+  };
+</script>

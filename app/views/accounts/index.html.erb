@@ -1,0 +1,12 @@
+<div class='container'>
+  <h1>Really Terrible Bank</h1>
+  <p>We take your security seroiusly</p>
+
+  <% @accounts.each do |account| %>
+    <div class='account'>
+      <p class='account-name'><strong>Account #<%= account.id %></strong></p>
+      <p><strong>Username:</strong> <%= account.user.name %></p>
+      <p><strong>Current balance:</strong> <%= account.balance %></p>
+    </div>
+  <% end %>
+</div>
